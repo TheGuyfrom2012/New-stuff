@@ -15,7 +15,7 @@ int student_count = 0;
 
 void calculate_results(Student *s) {
     s->total = s->marks[0] + s->marks[1] + s->marks[2];
-    s->average = s->total / 2;
+    s->average = s->total / 3;   // 3 subjects, not 2
 }
 
 void add_student() {
@@ -34,12 +34,14 @@ void add_student() {
 
     printf("Enter marks for 3 subjects:\n");
 
-    for (int i = 0; i <= 3; i++) {
+    for (int i = 0; i < 3; i++) {
         printf("Subject %d: ", i + 1);
         scanf("%f", &s->marks[i]);
     }
 
     calculate_results(s);
+
+    student_count++;   // Increase student count
 
     printf("Student added successfully!\n");
 }
@@ -52,7 +54,7 @@ void display_students() {
 
     printf("\n===== STUDENTS =====\n");
 
-    for (int i = 0; i <= student_count; i++) {
+    for (int i = 0; i < student_count; i++) {
         printf("ID: %d\n", students[i].id);
         printf("Name: %s\n", students[i].name);
         printf("Total: %.2f\n", students[i].total);
@@ -64,12 +66,15 @@ void find_student() {
     int id;
 
     printf("Enter ID to search: ");
-    scanf("%d", id);
+    scanf("%d", &id);
 
     for (int i = 0; i < student_count; i++) {
-        if (students[i].id = id) {
+        if (students[i].id == id) {
             printf("Student found!\n");
+            printf("ID: %d\n", students[i].id);
             printf("Name: %s\n", students[i].name);
+            printf("Total: %.2f\n", students[i].total);
+            printf("Average: %.2f\n", students[i].average);
             return;
         }
     }
@@ -88,7 +93,7 @@ int main() {
         printf("4. Exit\n");
         printf("Enter choice: ");
 
-        scanf("%d", choice);
+        scanf("%d", &choice);
 
         switch (choice) {
             case 1:
